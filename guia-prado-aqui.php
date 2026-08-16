@@ -20,6 +20,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Nunca acessar diretamente.
 }
 
+// ─── Registro de Logs de Erros Temporário para Diagnóstico ─────────────────────
+if ( ! defined( 'GPA_ERROR_LOG_PATH' ) ) {
+	define( 'GPA_ERROR_LOG_PATH', __DIR__ . '/gpa-errors.log' );
+}
+
+// Inicia o buffer para capturar erros fatais silenciosos no shutdown
+register_shutdown_function( function() {
+	$error = error_get_last();
+	if ( $error && in_array( $error['type'], [ E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR ], true ) ) {
+		$log_message = sprintf(
+			"[%s] FATAL ERROR: %s in %s on line %d\n",
+			date( 'Y-m-d H:i:s' ),
+			$error['message'],
+			$error['file'],
+			$error['line']
+		);
+		error_log( $log_message, 3, GPA_ERROR_LOG_PATH );
+	}
+} );
+
+// Handler para erros comuns
+set_error_handler( function( $errno, $errstr, $errfile, $errline ) {
+	if ( error_reporting() & $errno ) {
+		$log_message = sprintf(
+			"[%s] ERROR (%d): %s in %s on line %d\n",
+			date( 'Y-m-d H:i:s' ),
+			$errno,
+			$errstr,
+			$errfile,
+			$errline
+		);
+		error_log( $log_message, 3, GPA_ERROR_LOG_PATH );
+	}
+	return false;
+} );
+
+// Handler para exceções não capturadas
+set_exception_handler( function( $exception ) {
+	$log_message = sprintf(
+		"[%s] EXCEPTION: %s in %s on line %d\nStack trace:\n%s\n",
+		date( 'Y-m-d H:i:s' ),
+		$exception->getMessage(),
+		$exception->getFile(),
+		$exception->getLine(),
+		$exception->getTraceAsString()
+	);
+	error_log( $log_message, 3, GPA_ERROR_LOG_PATH );
+} );
+
 // ─── Constantes ────────────────────────────────────────────────────────────────
 define( 'GPA_VERSION',     '1.0.0' );
 define( 'GPA_PLUGIN_FILE', __FILE__ );

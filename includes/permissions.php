@@ -134,3 +134,15 @@ function gpa_ajax_toggle_user_cap(): void {
 
 	wp_send_json_success( [ 'message' => $message ] );
 }
+
+// ─── Garante que o administrador sempre tenha acesso (fallback) ──────────────
+add_action( 'admin_init', 'gpa_ensure_admin_capabilities' );
+
+function gpa_ensure_admin_capabilities(): void {
+	if ( current_user_can( 'administrator' ) && ! current_user_can( GPA_CAP ) ) {
+		$admin_role = get_role( 'administrator' );
+		if ( $admin_role ) {
+			$admin_role->add_cap( GPA_CAP );
+		}
+	}
+}

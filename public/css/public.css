@@ -1,0 +1,709 @@
+/* ============================================================
+   Guia Prado Aqui — Public CSS
+   Mobile-first, premium design, fiel ao MVP
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+/* ── Variables ────────────────────────────────────────────── */
+:root {
+  --g:      #087443;
+  --g-l:    #e7f8ef;
+  --g-d:    #053b2a;
+  --b:      #075d70;
+  --b-l:    #edf5f7;
+  --ink:    #10231b;
+  --muted:  #68766f;
+  --bg:     #f3f7f5;
+  --line:   #dce6e1;
+  --white:  #ffffff;
+  --r:      14px;
+  --shadow: 0 7px 24px rgba(16,35,27,.08);
+}
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+.gpa-catalog *,
+.gpa-ranch-page * {
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.gpa-header {
+  background: linear-gradient(135deg, #053b2a, #087443 58%, #075d70);
+  color: white;
+  padding: 40px 20px 32px;
+}
+
+.gpa-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gpa-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.gpa-header-icon {
+  font-size: 36px;
+  background: rgba(255,255,255,.15);
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gpa-header-txt small {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+}
+
+.gpa-header-txt h1 {
+  font-size: clamp(22px, 4vw, 34px);
+  font-weight: 900;
+  margin: 4px 0 0;
+  letter-spacing: -.5px;
+  line-height: 1.1;
+}
+
+.gpa-header-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,.7);
+  margin-top: 6px;
+}
+
+/* ── Search & Filters ────────────────────────────────────── */
+.gpa-search-bar {
+  background: rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.2);
+}
+
+.gpa-search-bar input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.gpa-search-bar input::placeholder { color: rgba(255,255,255,.55); }
+
+.gpa-search-bar input::-webkit-search-cancel-button { filter: invert(1); }
+
+/* ── Catalog Wrapper ─────────────────────────────────────── */
+.gpa-catalog {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ── Filter Bar ──────────────────────────────────────────── */
+.gpa-filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.gpa-filter-select {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+
+.gpa-filter-select:focus { border-color: var(--g); outline: none; }
+
+.gpa-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 22px;
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.gpa-filter-chip input { display: none; }
+.gpa-filter-chip:hover,
+.gpa-filter-chip.active { border-color: var(--g); color: var(--g); background: var(--g-l); }
+
+.gpa-count {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+/* ── Grid ────────────────────────────────────────────────── */
+.gpa-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.gpa-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.gpa-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(16,35,27,.12);
+}
+
+/* Photo */
+.gpa-card-photo {
+  position: relative;
+  height: 190px;
+  background: linear-gradient(135deg, #dcebe4, #c8dcd4);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gpa-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s;
+  loading: lazy;
+}
+
+.gpa-card:hover .gpa-card-photo img { transform: scale(1.04); }
+
+.gpa-card-placeholder {
+  font-size: 48px;
+  opacity: .5;
+}
+
+.gpa-card-verified-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(8,116,67,.92);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  letter-spacing: .5px;
+}
+
+.gpa-card-nota-badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(255,255,255,.95);
+  color: var(--g);
+  font-size: 13px;
+  font-weight: 900;
+  padding: 5px 11px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Body */
+.gpa-card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+
+.gpa-card-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.gpa-card-id {
+  font-size: 10px;
+  color: #9aa59f;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+.gpa-card-badge {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 4px 9px;
+  border-radius: 20px;
+  background: #eef2f0;
+  color: #66736d;
+  letter-spacing: .3px;
+}
+
+.gpa-card-badge.ok { background: var(--g-l); color: var(--g); }
+
+.gpa-card h2 {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.gpa-card-city {
+  color: var(--b);
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Quick info grid */
+.gpa-card-quick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.gpa-card-info {
+  background: #fbfcfb;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 11px;
+}
+
+.gpa-card-info-label {
+  display: block;
+  font-size: 8px;
+  font-weight: 800;
+  color: #89948f;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.gpa-card-info-value {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.gpa-card-info-value.confirmar { color: var(--muted); font-style: italic; }
+
+/* Tags de pesca */
+.gpa-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.gpa-tag {
+  background: var(--b-l);
+  color: var(--b);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 12px;
+}
+
+/* Buttons */
+.gpa-card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.gpa-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+  text-align: center;
+  min-height: 44px;
+}
+
+.gpa-btn:active { transform: scale(.97); }
+
+.gpa-btn-green { background: #15a060; color: white; }
+.gpa-btn-green:hover { background: #0f7a4c; color: white; }
+
+.gpa-btn-blue { background: var(--b-l); color: var(--b); }
+.gpa-btn-blue:hover { background: #d0e8ed; color: var(--b); }
+
+.gpa-btn-view { background: #f0f4f2; color: var(--ink); }
+.gpa-btn-view:hover { background: var(--line); color: var(--ink); }
+
+/* ── Empty State ─────────────────────────────────────────── */
+.gpa-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+
+.gpa-empty-state span { font-size: 48px; display: block; margin-bottom: 16px; }
+.gpa-empty-state p { font-size: 16px; }
+
+/* ── Loading ─────────────────────────────────────────────── */
+.gpa-loading {
+  display: none;
+  grid-column: 1 / -1;
+  justify-content: center;
+  align-items: center;
+  padding: 60px;
+  gap: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.gpa-loading.visible { display: flex; }
+
+.gpa-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--line);
+  border-top-color: var(--g);
+  border-radius: 50%;
+  animation: gpa-spin .7s linear infinite;
+}
+
+@keyframes gpa-spin { to { transform: rotate(360deg); } }
+
+/* ── Pagination ──────────────────────────────────────────── */
+.gpa-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.gpa-page-btn {
+  padding: 10px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--ink);
+  transition: all .15s;
+}
+
+.gpa-page-btn:hover { border-color: var(--g); color: var(--g); }
+.gpa-page-btn.active { background: var(--g); color: white; border-color: var(--g); }
+.gpa-page-btn:disabled { opacity: .4; cursor: default; }
+
+/* ── Ranch Single Page ───────────────────────────────────── */
+.gpa-ranch-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+.gpa-ranch-hero {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: var(--line);
+  min-height: 300px;
+}
+
+.gpa-ranch-hero img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+}
+
+.gpa-ranch-hero-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(5,30,18,.85));
+  padding: 60px 24px 28px;
+  color: white;
+}
+
+.gpa-ranch-hero-name {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+
+.gpa-ranch-hero-city {
+  font-size: 15px;
+  color: rgba(255,255,255,.8);
+  font-weight: 600;
+}
+
+/* Galeria */
+.gpa-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.gpa-gallery img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+
+.gpa-gallery img:hover { opacity: .85; }
+
+/* Info blocks */
+.gpa-ranch-info-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.gpa-info-block {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.gpa-info-block h3 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin: 0 0 14px;
+  border-bottom: 2px solid var(--g-l);
+  padding-bottom: 8px;
+}
+
+/* Nota Prado */
+.gpa-nota-destaque {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--g-l), var(--b-l));
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.gpa-nota-number {
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--g);
+  line-height: 1;
+}
+
+.gpa-nota-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Feature lists */
+.gpa-feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.gpa-feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 7px 10px;
+  background: var(--bg);
+  border-radius: 8px;
+}
+
+/* Verificação Badge */
+.gpa-verified-seal {
+  background: var(--g-l);
+  border: 1.5px solid #a3d9bf;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.gpa-verified-seal .seal-icon { font-size: 24px; }
+.gpa-verified-seal .seal-text { font-size: 12px; font-weight: 700; color: var(--g); }
+.gpa-verified-seal .seal-date { font-size: 11px; color: var(--muted); }
+
+/* CTA Buttons */
+.gpa-ranch-cta {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.gpa-cta-wa {
+  flex: 2;
+  background: #25d366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 24px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background .15s;
+  min-height: 56px;
+}
+
+.gpa-cta-wa:hover { background: #1db954; color: white; }
+
+.gpa-cta-maps {
+  flex: 1;
+  background: var(--b-l);
+  color: var(--b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  min-height: 56px;
+}
+
+/* Breadcrumb */
+.gpa-breadcrumb {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.gpa-breadcrumb a { color: var(--g); text-decoration: none; font-weight: 600; }
+.gpa-breadcrumb a:hover { text-decoration: underline; }
+
+/* City Page */
+.gpa-city-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.gpa-city-hero {
+  background: linear-gradient(135deg, #053b2a, #087443 58%, #075d70);
+  border-radius: 20px;
+  padding: 40px;
+  color: white;
+  margin-bottom: 32px;
+}
+
+.gpa-city-hero h1 {
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
+.gpa-city-hero p {
+  color: rgba(255,255,255,.75);
+  font-size: 15px;
+  margin: 0;
+}
+
+/* ── SEO / Head ──────────────────────────────────────────── */
+.gpa-seo-none { display: none; }
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .gpa-grid { grid-template-columns: repeat(2, 1fr); }
+  .gpa-gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .gpa-ranch-info-grid { grid-template-columns: 1fr; }
+  .gpa-ranch-cta { flex-direction: column; }
+  .gpa-cta-wa, .gpa-cta-maps { flex: unset; }
+  .gpa-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .gpa-grid { grid-template-columns: 1fr; }
+  .gpa-filters { gap: 8px; }
+  .gpa-header { padding: 28px 16px 24px; }
+  .gpa-catalog { padding: 20px 14px 50px; }
+  .gpa-card-buttons { flex-direction: column; }
+  .gpa-btn { min-height: 50px; font-size: 14px; }
+  .gpa-ranch-hero img { height: 260px; }
+  .gpa-gallery { grid-template-columns: repeat(2, 1fr); }
+  .gpa-city-hero { padding: 24px; }
+  .gpa-info-block { padding: 16px; }
+}
+
+@media (max-width: 380px) {
+  .gpa-card-quick { grid-template-columns: 1fr; }
+}

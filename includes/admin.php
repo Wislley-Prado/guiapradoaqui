@@ -98,6 +98,9 @@ add_filter( 'submenu_file',     'gpa_submenu_file_fix' );
 
 function gpa_parent_file_fix( string $parent_file ): string {
 	global $current_screen;
+	if ( ! isset( $current_screen ) || ! is_a( $current_screen, 'WP_Screen' ) ) {
+		return $parent_file;
+	}
 	if ( in_array( $current_screen->post_type, [ GPA_CPT ], true ) ||
 	     $current_screen->taxonomy === GPA_TAXONOMY ) {
 		return 'guia-prado-aqui';
@@ -107,6 +110,9 @@ function gpa_parent_file_fix( string $parent_file ): string {
 
 function gpa_submenu_file_fix( ?string $submenu_file ): ?string {
 	global $current_screen, $pagenow;
+	if ( ! isset( $current_screen ) || ! is_a( $current_screen, 'WP_Screen' ) ) {
+		return $submenu_file;
+	}
 	if ( $current_screen->post_type === GPA_CPT ) {
 		if ( $pagenow === 'post-new.php' ) {
 			return 'post-new.php?post_type=' . GPA_CPT;

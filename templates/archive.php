@@ -60,6 +60,7 @@ $is_shortcode = defined( 'GPA_IS_SHORTCODE' ) && GPA_IS_SHORTCODE;
 if ( ! $is_shortcode ) {
 	get_header();
 }
+?>
 
 
 

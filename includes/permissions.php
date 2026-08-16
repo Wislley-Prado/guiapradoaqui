@@ -136,10 +136,10 @@ function gpa_ajax_toggle_user_cap(): void {
 }
 
 // ─── Garante que o administrador sempre tenha acesso (fallback) ──────────────
-add_action( 'admin_init', 'gpa_ensure_admin_capabilities' );
+add_action( 'admin_menu', 'gpa_ensure_admin_capabilities', 5 );
 
 function gpa_ensure_admin_capabilities(): void {
-	if ( current_user_can( 'administrator' ) && ! current_user_can( GPA_CAP ) ) {
+	if ( current_user_can( 'manage_options' ) && ! current_user_can( GPA_CAP ) ) {
 		$admin_role = get_role( 'administrator' );
 		if ( $admin_role ) {
 			$admin_role->add_cap( GPA_CAP );

@@ -51,10 +51,10 @@ function gpa_render_import_page(): void {
 			<h3>📋 Resultado da Importação</h3>
 			<div class="gpa-log-stats">
 				<?php
-				$criados    = count( array_filter( $log, fn( $l ) => $l['status'] === 'created' ) );
-				$atualizados= count( array_filter( $log, fn( $l ) => $l['status'] === 'updated' ) );
-				$erros      = count( array_filter( $log, fn( $l ) => $l['status'] === 'error' ) );
-				$ignorados  = count( array_filter( $log, fn( $l ) => $l['status'] === 'skipped' ) );
+				$criados    = count( array_filter( $log, function( $l ) { return $l['status'] === 'created'; } ) );
+				$atualizados= count( array_filter( $log, function( $l ) { return $l['status'] === 'updated'; } ) );
+				$erros      = count( array_filter( $log, function( $l ) { return $l['status'] === 'error'; } ) );
+				$ignorados  = count( array_filter( $log, function( $l ) { return $l['status'] === 'skipped'; } ) );
 				?>
 				<span class="gpa-log-stat gpa-log-created">✅ <?php echo esc_html( $criados ); ?> criados</span>
 				<span class="gpa-log-stat gpa-log-updated">🔄 <?php echo esc_html( $atualizados ); ?> atualizados</span>
@@ -65,13 +65,15 @@ function gpa_render_import_page(): void {
 				<?php foreach ( $log as $l ) : ?>
 				<div class="gpa-log-item gpa-log-<?php echo esc_attr( $l['status'] ); ?>">
 					<span class="gpa-log-icon">
-						<?php echo match( $l['status'] ) {
+						<?php
+						$status_icons = [
 							'created'  => '✅',
 							'updated'  => '🔄',
 							'skipped'  => '⏭️',
 							'error'    => '❌',
-							default    => '•',
-						}; ?>
+						];
+						echo esc_html( $status_icons[ $l['status'] ] ?? '•' );
+						?>
 					</span>
 					<span class="gpa-log-msg"><?php echo esc_html( $l['message'] ); ?></span>
 				</div>

@@ -68,7 +68,7 @@ function gpa_register_rest_routes(): void {
 
 // ─── Permission Check ─────────────────────────────────────────────────────────
 
-function gpa_api_permission_check(): bool | WP_Error {
+function gpa_api_permission_check() {
 	if ( ! is_user_logged_in() ) {
 		return new WP_Error( 'rest_forbidden', 'Autenticação necessária.', [ 'status' => 401 ] );
 	}
@@ -80,7 +80,7 @@ function gpa_api_permission_check(): bool | WP_Error {
 
 // ─── GET /ranchos ─────────────────────────────────────────────────────────────
 
-function gpa_api_get_ranchos( WP_REST_Request $request ): WP_REST_Response | WP_Error {
+function gpa_api_get_ranchos( WP_REST_Request $request ) {
 	$page     = $request->get_param( 'page' );
 	$per_page = $request->get_param( 'per_page' );
 	$search   = $request->get_param( 'search' );
@@ -175,7 +175,7 @@ function gpa_api_get_ranchos( WP_REST_Request $request ): WP_REST_Response | WP_
 
 // ─── GET /ranchos/{id} ────────────────────────────────────────────────────────
 
-function gpa_api_get_rancho( WP_REST_Request $request ): WP_REST_Response | WP_Error {
+function gpa_api_get_rancho( WP_REST_Request $request ) {
 	$id   = $request->get_param( 'id' );
 	$post = get_post( $id );
 
@@ -193,7 +193,7 @@ function gpa_api_get_rancho( WP_REST_Request $request ): WP_REST_Response | WP_E
 
 // ─── GET /cidades ─────────────────────────────────────────────────────────────
 
-function gpa_api_get_cidades( WP_REST_Request $request ): WP_REST_Response | WP_Error {
+function gpa_api_get_cidades( WP_REST_Request $request ) {
 	$terms = get_terms( [
 		'taxonomy'   => GPA_TAXONOMY,
 		'hide_empty' => true,
@@ -222,7 +222,7 @@ function gpa_api_get_cidades( WP_REST_Request $request ): WP_REST_Response | WP_
 
 // ─── GET /cidades/{id} ────────────────────────────────────────────────────────
 
-function gpa_api_get_cidade( WP_REST_Request $request ): WP_REST_Response | WP_Error {
+function gpa_api_get_cidade( WP_REST_Request $request ) {
 	$id   = $request->get_param( 'id' );
 	$term = get_term( $id, GPA_TAXONOMY );
 
@@ -243,7 +243,7 @@ function gpa_api_get_cidade( WP_REST_Request $request ): WP_REST_Response | WP_E
 
 // ─── POST /ranchos (privado) ──────────────────────────────────────────────────
 
-function gpa_api_create_rancho( WP_REST_Request $request ): WP_REST_Response | WP_Error {
+function gpa_api_create_rancho( WP_REST_Request $request ) {
 	$nome = sanitize_text_field( $request->get_param( 'nome' ) ?? '' );
 
 	if ( ! $nome ) {

@@ -464,15 +464,17 @@ function gpa_page_verificacoes(): void {
 						<?php endif; ?>
 					</td>
 					<td>
-						<?php if ( $preco ) :
+						<?php
+						if ( $preco ) {
 							echo 'R$ ' . esc_html( $preco );
 							if ( $tipo_preco && $tipo_preco !== 'a_confirmar' ) {
 								$tipos = [ 'diaria' => '/diária', 'por_pessoa' => '/pessoa', 'pacote' => '(pacote)' ];
 								echo ' ' . esc_html( $tipos[ $tipo_preco ] ?? '' );
 							}
-						else : ?>
-							<span class="gpa-missing">A confirmar</span>
-						<?php endif; ?>
+						} else {
+							echo '<span class="gpa-missing">A confirmar</span>';
+						}
+						?>
 					</td>
 					<td class="gpa-confirmacoes-cell">
 						<span class="gpa-conf <?php echo $tel_ok ? 'ok' : 'no'; ?>" title="Telefone">📱</span>

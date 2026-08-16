@@ -20,8 +20,7 @@ function gpa_register_admin_menu(): void {
 		GPA_CAP,
 		'guia-prado-aqui',
 		'gpa_page_dashboard',
-		'dashicons-location-alt',
-		4
+		'dashicons-location-alt'
 	);
 
 	// Dashboard

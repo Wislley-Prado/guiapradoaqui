@@ -77,7 +77,9 @@ define( 'GPA_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 define( 'GPA_PLUGIN_SLUG', 'guia-prado-aqui' );
 define( 'GPA_CPT',         'rancho' );
 define( 'GPA_TAXONOMY',    'cidade' );
-define( 'GPA_CAP',         'manage_guia_prado' );
+// Define a capability de forma robusta e dinâmica (evita bugs de cache de banco/objeto na Hostinger)
+$gpa_settings_cap = get_option( 'gpa_settings', [] );
+define( 'GPA_CAP', ! empty( $gpa_settings_cap['editor_can_manage'] ) ? 'edit_pages' : 'manage_options' );
 
 // ─── Loader ────────────────────────────────────────────────────────────────────
 require_once GPA_PLUGIN_DIR . 'includes/helpers.php';
